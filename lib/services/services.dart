@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ilanga/blocs/bloc_router.dart';
 import 'package:toast/toast.dart';
 
 class DbFire {
   //final _scaffoldKey = GlobalKey<ScaffoldMessengerState>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
   dynamic errorMessage = '';
   dynamic errorCode = '';
   //String get getErrorMessage => error;
@@ -18,6 +20,7 @@ class DbFire {
       User user = userCredential.user;
 
       if (user != null) {
+        Navigator.pushReplacement(context, BlocRouter().welcomePage(user));
         print('geschaft');
       } else {
         throw PlatformException(

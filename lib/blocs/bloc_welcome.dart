@@ -17,6 +17,10 @@ class BlocWelcome extends Bloc {
     sink.add(resultat);
   }
 
+  BlocWelcome() {
+    init();
+  }
+
   @override
   dispose() {
     _streamController.close();
@@ -26,6 +30,9 @@ class BlocWelcome extends Bloc {
 
 class WelcomeState {
   final User currentUser;
+  final FirebaseAuth firebaseAuth;
 
-  WelcomeState({this.currentUser});
+  Stream<User> get authState => firebaseAuth.idTokenChanges();
+
+  WelcomeState({this.currentUser, this.firebaseAuth});
 }

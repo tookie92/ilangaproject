@@ -9,6 +9,8 @@ import 'package:ilanga/ui/screens/welcome.dart';
 
 class BlocRouter {
   MaterialPageRoute signUp() => MaterialPageRoute(builder: (ctx) => signup());
+  MaterialPageRoute welcomePage(User user) =>
+      MaterialPageRoute(builder: (ctx) => welcome(user));
 
   //homePage
   BlocProvider signin() =>
@@ -16,4 +18,6 @@ class BlocRouter {
 
   BlocProvider signup() =>
       BlocProvider<BlocRegister>(bloc: BlocRegister(), child: SignUpPage());
+  BlocProvider welcome(User u) =>
+      BlocProvider<BlocWelcome>(bloc: BlocWelcome(), child: WelcomePage(u));
 }
