@@ -30,9 +30,6 @@ class BlocWelcome extends Bloc {
 
 class WelcomeState {
   final User currentUser;
-  final FirebaseAuth firebaseAuth;
 
-  Stream<User> get authState => firebaseAuth.idTokenChanges();
-
-  WelcomeState({this.currentUser, this.firebaseAuth});
+  WelcomeState({this.currentUser});
 }
