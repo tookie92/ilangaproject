@@ -24,7 +24,7 @@ class BlocWelcome extends Bloc {
   @override
   dispose() {
     _streamController.close();
-    throw UnimplementedError();
+    //throw UnimplementedError();
   }
 }
 

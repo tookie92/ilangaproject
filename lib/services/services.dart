@@ -12,21 +12,24 @@ class DbFire {
   dynamic errorCode = '';
   //String get getErrorMessage => error;
 
+//Sign in
   Future<void> signin(String emailController, String passwordController,
       BuildContext context) async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: emailController.trim(), password: passwordController.trim());
       User user = userCredential.user;
+      User currentUser = FirebaseAuth.instance.currentUser;
 
-      if (user != null) {
+      if (currentUser != null) {
         Navigator.pushReplacement(context, BlocRouter().welcomePage(user));
         print('geschaft');
       } else {
         throw PlatformException(
             code: errorCode, message: errorMessage as String);
       }
-      return userCredential;
+
+      return user;
     } on FirebaseAuthException catch (e) {
       print(e.code);
       Toast.show(e.code, context,
@@ -34,6 +37,7 @@ class DbFire {
     }
   }
 
+//Future Sign uo
   Future<void> signup(String emailController, String passwordController,
       String nameController, BuildContext context) async {
     try {
@@ -57,5 +61,10 @@ class DbFire {
       Toast.show(e.code, context,
           duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
     }
+  }
+
+  //signout
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 }

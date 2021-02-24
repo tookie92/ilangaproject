@@ -3,6 +3,7 @@ import 'package:ilanga/blocs/bloc_router.dart';
 import 'package:ilanga/services/services.dart';
 import 'package:ilanga/ui/settings/palette.dart';
 import 'package:ilanga/ui/widgets/text_field.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SigninForm extends StatelessWidget {
   @override
@@ -49,8 +50,12 @@ class SigninForm extends StatelessWidget {
                   onPressed: () async {
                     if (_formkey.currentState.validate()) {
                       _formkey.currentState.save();
+                      _formkey.currentState.reset();
                       print(_emailController.text);
                       print(_passwordController.text);
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      prefs.setString('email', _emailController.text);
                       await DbFire().signin(_emailController.text,
                           _passwordController.text, context);
                     }

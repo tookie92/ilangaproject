@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:ilanga/blocs/bloc_router.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var email = prefs.getString('email');
+  print(email);
+  User user;
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(MaterialApp(
+    title: 'Flutter Demo',
+    debugShowCheckedModeBanner: false,
+    home: email == null ? BlocRouter().signin() : BlocRouter().welcome(user),
+  ));
 }
 
 class MyApp extends StatelessWidget {
