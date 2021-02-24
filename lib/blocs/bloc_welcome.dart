@@ -18,7 +18,9 @@ class BlocWelcome extends Bloc {
   }
 
   BlocWelcome() {
-    init();
+    if (FirebaseAuth.instance.currentUser != null) {
+      init();
+    }
   }
 
   @override

@@ -23,8 +23,25 @@ class WelcomePage extends StatelessWidget {
                 child: Text('nothing'),
               );
             } else if (!s.hasData) {
-              return Center(
-                child: Text('nothing jo'),
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Center(
+                    child: Text('Du bist nicht verbunden'),
+                  ),
+                  TextButton(
+                      onPressed: () async {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        prefs.remove('email');
+                        await DbFire().signOut();
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => BlocRouter().signin()));
+                      },
+                      child: Text('Logout'))
+                ],
               );
             } else {
               return Column(
