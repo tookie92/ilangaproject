@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ilanga/services/services.dart';
 import 'package:ilanga/ui/widgets/text_field.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpForm extends StatelessWidget {
   @override
@@ -55,6 +56,8 @@ class SignUpForm extends StatelessWidget {
                 print(_emailController.text);
                 print(_passwordController.text);
                 print(_nameController.text);
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.setString('email', _emailController.text);
                 await DbFire().signup(_emailController.text,
                     _passwordController.text, _nameController.text, context);
               }
