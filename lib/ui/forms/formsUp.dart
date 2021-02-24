@@ -52,12 +52,13 @@ class SignUpForm extends StatelessWidget {
             onPressed: () async {
               if (_formkey.currentState.validate()) {
                 _formkey.currentState.save();
-                _formkey.currentState.reset();
+                //_formkey.currentState.reset();
                 print(_emailController.text);
                 print(_passwordController.text);
                 print(_nameController.text);
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.setString('email', _emailController.text);
+                prefs.setString('displayName', _nameController.text);
                 await DbFire().signup(_emailController.text,
                     _passwordController.text, _nameController.text, context);
               }

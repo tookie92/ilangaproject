@@ -50,7 +50,7 @@ class SigninForm extends StatelessWidget {
                   onPressed: () async {
                     if (_formkey.currentState.validate()) {
                       _formkey.currentState.save();
-                      _formkey.currentState.reset();
+
                       print(_emailController.text);
                       print(_passwordController.text);
                       SharedPreferences prefs =

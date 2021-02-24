@@ -18,52 +18,67 @@ class WelcomePage extends StatelessWidget {
       body: StreamBuilder<WelcomeState>(
           stream: bloc.stream,
           builder: (ctx, s) {
-            if (s == null) {
+            if (s == null && s.data == null) {
               return Center(
                 child: Text('nothing'),
               );
             } else if (!s.hasData) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Center(
-                    child: Text('Du bist nicht verbunden'),
-                  ),
-                  TextButton(
-                      onPressed: () async {
-                        SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                        prefs.remove('email');
-                        await DbFire().signOut();
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => BlocRouter().signin()));
-                      },
-                      child: Text('Logout'))
-                ],
+              return Scaffold(
+                body: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Center(
+                      child: Text('Du bist nicht verbunden'),
+                    ),
+                    TextButton(
+                        onPressed: () async {
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          prefs.remove('email');
+                          await DbFire().signOut();
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => BlocRouter().signin()));
+                        },
+                        child: Text('Logout'))
+                  ],
+                ),
               );
             } else {
-              return Column(
-                //crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Center(
-                    child: Text(s.data.currentUser.displayName),
-                  ),
-                  TextButton(
-                      onPressed: () async {
-                        SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                        prefs.remove('email');
-                        await DbFire().signOut();
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => BlocRouter().signin()));
-                      },
-                      child: Text('logout'))
-                ],
+              return Scaffold(
+                appBar: AppBar(
+                  title: Text('Bienvenue'),
+                  actions: [
+                    IconButton(
+                        icon: Icon(Icons.logout),
+                        onPressed: () async {
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          prefs.remove('email');
+                          await DbFire().signOut();
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => BlocRouter().signin()));
+                        })
+                  ],
+                ),
+                body: Column(
+                  //crossAxisAlignment: CrossAxisAlignment.center,
+                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 40.0),
+                      child: Text(
+                        'Bienvenue \n${s.data.currentUser.displayName}',
+                        style: TextStyle(
+                            fontSize: 20.0, fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ],
+                ),
               );
             }
           }),
