@@ -1,10 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class Task {
   String key;
   String title;
-  User user;
+  String user;
 
   Task(this.title, this.user);
 
