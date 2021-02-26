@@ -7,7 +7,7 @@ import 'package:ilanga/models/tasks.dart';
 
 class BlocTask extends Bloc {
   final db = FirebaseDatabase.instance;
-  User user;
+  User user = FirebaseAuth.instance.currentUser;
   final _streamController = StreamController<TaskState>();
 
   Stream<TaskState> get stream => _streamController.stream;
@@ -17,6 +17,7 @@ class BlocTask extends Bloc {
     final resultat = TaskState(
         tasklist: [],
         task: Task('', ''),
+        currentUser: FirebaseAuth.instance.currentUser,
         databaseReference: db.reference().child('users/${user.uid}/tasks'));
     sink.add(resultat);
   }
@@ -40,9 +41,11 @@ class TaskState {
   List<Task> tasklist;
   DatabaseReference databaseReference;
   final db = FirebaseDatabase.instance;
+  final User currentUser;
   Task task;
 
-  TaskState({this.databaseReference, this.task, this.tasklist});
+  TaskState(
+      {this.databaseReference, this.task, this.tasklist, this.currentUser});
 
   createData() {
     databaseReference.push().set(task.toJson()).then((_) => print('geschaft'));

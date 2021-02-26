@@ -8,6 +8,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var email = prefs.getString('email');
+  var uid = prefs.getString('uid');
+  print(uid);
   print(email);
   User user;
   await Firebase.initializeApp();

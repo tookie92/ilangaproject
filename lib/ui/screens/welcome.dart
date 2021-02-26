@@ -64,20 +64,26 @@ class WelcomePage extends StatelessWidget {
                         })
                   ],
                 ),
-                body: Column(
-                  //crossAxisAlignment: CrossAxisAlignment.center,
-                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 40.0),
-                      child: Text(
+                body: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 40.0),
+                  child: Column(
+                    //crossAxisAlignment: CrossAxisAlignment.center,
+                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
                         'Bienvenue \n${s.data.currentUser.displayName}',
                         style: TextStyle(
                             fontSize: 20.0, fontWeight: FontWeight.w600),
                       ),
-                    ),
-                  ],
+                      TextButton(
+                          onPressed: () {
+                            Navigator.of(context)
+                                .push(BlocRouter().crudityPage());
+                          },
+                          child: Text('tasks')),
+                    ],
+                  ),
                 ),
               );
             }

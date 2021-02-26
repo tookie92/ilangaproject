@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class Task {
@@ -13,6 +14,9 @@ class Task {
         user = snapshot.value('user');
 
   toJson() {
-    return {'title': title, 'user': user};
+    return {
+      'title': title,
+      'user': FirebaseAuth.instance.currentUser.displayName
+    };
   }
 }

@@ -5,13 +5,17 @@ class MyTextField extends StatelessWidget {
   final TextEditingController textEditingController;
   final String label;
   final Function validator;
+  final String initialValue;
+  final Function onSaved;
   final bool obscureText;
   final TextInputType textInputType;
 
   MyTextField(
-      {@required this.textEditingController,
+      {this.textEditingController,
+      this.onSaved,
       @required this.label,
       @required this.validator,
+      this.initialValue,
       this.obscureText = false,
       this.textInputType});
 
@@ -20,7 +24,9 @@ class MyTextField extends StatelessWidget {
     return TextFormField(
       controller: textEditingController,
       obscureText: obscureText,
+      initialValue: initialValue,
       keyboardType: textInputType,
+      onSaved: onSaved,
       decoration: InputDecoration(
         labelText: label,
         labelStyle: TextStyle(color: Colors.white),
