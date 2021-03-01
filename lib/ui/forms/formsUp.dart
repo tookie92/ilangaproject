@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ilanga/services/services.dart';
 import 'package:ilanga/ui/widgets/text_field.dart';
@@ -10,7 +9,7 @@ class SignUpForm extends StatelessWidget {
     TextEditingController _emailController = TextEditingController();
     TextEditingController _passwordController = TextEditingController();
     TextEditingController _nameController = TextEditingController();
-    User user;
+    // User user;
     final _formkey = GlobalKey<FormState>();
 
     return Column(

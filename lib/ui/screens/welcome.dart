@@ -4,6 +4,7 @@ import 'package:ilanga/blocs/bloc_provider.dart';
 import 'package:ilanga/blocs/bloc_router.dart';
 import 'package:ilanga/blocs/bloc_welcome.dart';
 import 'package:ilanga/services/services.dart';
+import 'package:ilanga/ui/settings/palette.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -14,6 +15,7 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<BlocWelcome>(context);
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: StreamBuilder<WelcomeState>(
           stream: bloc.stream,
@@ -48,6 +50,8 @@ class WelcomePage extends StatelessWidget {
             } else {
               return Scaffold(
                 appBar: AppBar(
+                  elevation: 0.0,
+                  backgroundColor: Palette.monNoir,
                   title: Text('Bienvenue'),
                   actions: [
                     IconButton(
@@ -64,24 +68,49 @@ class WelcomePage extends StatelessWidget {
                         })
                   ],
                 ),
-                body: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 20.0, vertical: 40.0),
+                body: Container(
+                  height: size.height,
+                  width: size.width,
+                  decoration: BoxDecoration(color: Palette.monNoir),
                   child: Column(
                     //crossAxisAlignment: CrossAxisAlignment.center,
                     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      SizedBox(
+                        height: size.height / 3,
+                      ),
                       Text(
                         'Bienvenue \n${s.data.currentUser.displayName}',
+                        textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: 20.0, fontWeight: FontWeight.w600),
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: 40.0,
                       ),
                       TextButton(
+                          style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              elevation: 5,
+                              shadowColor: Colors.purple[900],
+                              backgroundColor: Palette.monGris,
+                              onSurface: Colors.grey,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(7)))),
                           onPressed: () {
                             Navigator.of(context)
                                 .push(BlocRouter().crudityPage());
                           },
-                          child: Text('tasks')),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Create a tasks'.toUpperCase(),
+                              style: TextStyle(fontSize: 15.0),
+                            ),
+                          )),
                     ],
                   ),
                 ),
