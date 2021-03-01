@@ -1,5 +1,4 @@
 import 'package:firebase_database/firebase_database.dart';
-import 'package:ilanga/models/tasks.dart';
 
 class CrudFire {
   //tasklist = [];
