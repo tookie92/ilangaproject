@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ilanga/services/services.dart';
-import 'package:ilanga/ui/widgets/text_field.dart';
+import 'package:ilanga/ui/widgets/my_text_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpForm extends StatelessWidget {
@@ -9,6 +9,10 @@ class SignUpForm extends StatelessWidget {
     TextEditingController _emailController = TextEditingController();
     TextEditingController _passwordController = TextEditingController();
     TextEditingController _nameController = TextEditingController();
+<<<<<<< HEAD
+=======
+    // User user;
+>>>>>>> list
     final _formkey = GlobalKey<FormState>();
 
     return Column(

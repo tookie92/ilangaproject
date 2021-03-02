@@ -11,12 +11,10 @@ class Task {
   Task.fromSnapshot(DataSnapshot snapshot)
       : key = snapshot.key,
         title = snapshot.value['title'],
-        user = snapshot.value('user');
+        user = snapshot.value['user'];
 
   toJson() {
-    return {
-      'title': title,
-      'user': FirebaseAuth.instance.currentUser.displayName
-    };
+    final String entry = FirebaseAuth.instance.currentUser.displayName;
+    return {'title': title, 'user': entry};
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ilanga/blocs/bloc_router.dart';
 import 'package:ilanga/services/services.dart';
 import 'package:ilanga/ui/settings/palette.dart';
-import 'package:ilanga/ui/widgets/text_field.dart';
+import 'package:ilanga/ui/widgets/my_text_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SigninForm extends StatelessWidget {
